@@ -6,6 +6,7 @@ export type HourlyStat = {
 export type WorkSessionDraft = {
   currentTickets: number;
   dailyGoal: number;
+  dailyHoursGoal?: number;
   hourlyStats: HourlyStat[];
   startedAt: string;
   streak: number;

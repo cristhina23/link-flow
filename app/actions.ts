@@ -48,7 +48,7 @@ export async function saveWorkSession(payload: SavedSessionPayload) {
     .from("work_sessions")
     .insert({
       user_id: profile.id,
-      date: payload.date,
+      session_date: payload.date,
       total_tickets: payload.totalTickets,
       goal_completed: payload.totalTickets >= payload.dailyGoal,
       total_hours: payload.totalHours,

@@ -15,6 +15,7 @@ function getInitialSession(): WorkSessionDraft {
   return {
     currentTickets: 0,
     dailyGoal: DEFAULT_GOAL,
+    dailyHoursGoal: 8,
     hourlyStats: createEmptyHourlyStats(),
     startedAt: new Date().toISOString(),
     streak: 4,
@@ -99,5 +100,7 @@ export function useLocalSession() {
     resetSession,
     setDailyGoal: (dailyGoal: number) =>
       setSession((current) => ({ ...current, dailyGoal })),
+    setDailyHoursGoal: (dailyHoursGoal: number) =>
+      setSession((current) => ({ ...current, dailyHoursGoal: Math.max(1, dailyHoursGoal) })),
   };
 }

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, Flame, Gauge, Link2, Trophy } from "lucide-react";
+import { BarChart3, Flame, Gauge, Link2, Settings, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -10,6 +10,7 @@ const navItems = [
   { label: "Analytics", icon: BarChart3, href: "/dashboard/analytics" },
   { label: "Streaks", icon: Flame, href: "/dashboard/streaks" },
   { label: "Badges", icon: Trophy, href: "/dashboard/badges" },
+  { label: "Settings", icon: Settings, href: "/dashboard/settings" },
 ];
 
 export function Sidebar() {
