@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LinkFlow
 
-## Getting Started
+LinkFlow is a modern productivity tracking app for remote workers who review tickets, links, and tasks during focused work sessions.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 App Router with TypeScript
+- TailwindCSS 4 with shadcn-style UI primitives
+- Clerk authentication with Google sign-in
+- Supabase PostgreSQL
+- Recharts analytics
+- Framer Motion animations
+- next-themes dark mode
+- Vercel-ready deployment
+
+## Local Setup
+
+1. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Create `.env.local` from `.env.example` and fill in Clerk and Supabase values.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. In Clerk, enable Google as a social connection. Set the fallback redirect URLs to `/dashboard`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. In Supabase, run the SQL in `supabase/schema.sql`.
 
-## Learn More
+5. Start development:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open `http://localhost:3000`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Environment Variables
 
-## Deploy on Vercel
+```bash
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/
+NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/dashboard
+NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/dashboard
+NEXT_PUBLIC_SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Supabase
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The schema creates:
+
+- `users`
+- `work_sessions`
+- `hourly_stats`
+- `achievements`
+
+Server actions use the Supabase service role key, so keep it server-only and never expose it with `NEXT_PUBLIC_`.
+
+## Vercel Deployment
+
+1. Push the repository to GitHub.
+2. Import the project in Vercel.
+3. Add the same environment variables from `.env.example`.
+4. Deploy.
+
+Next.js 16 uses Turbopack by default for `next dev` and `next build`; no extra flags are required.

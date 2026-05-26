@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff8f3;
+  --foreground: #20151d;
+  --card: rgba(255, 255, 255, 0.72);
+  --card-foreground: #20151d;
+  --muted: #f6e9e3;
+  --muted-foreground: #75636d;
+  --border: rgba(87, 51, 67, 0.14);
+  --primary: #f97316;
+  --primary-foreground: #fff7ed;
+  --ring: #fb7185;
+}
+
+.dark {
+  --background: #070b1a;
+  --foreground: #fbf7ff;
+  --card: rgba(17, 24, 49, 0.72);
+  --card-foreground: #fbf7ff;
+  --muted: #121a33;
+  --muted-foreground: #a9abc0;
+  --border: rgba(255, 255, 255, 0.12);
+  --primary: #fb923c;
+  --primary-foreground: #0f1021;
+  --ring: #c084fc;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button,
+a,
+input {
+  outline-color: var(--ring);
+}
+
+::selection {
+  background: rgba(249, 115, 22, 0.25);
+}
+
+.glass-card {
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 24px 80px rgba(58, 22, 44, 0.12);
+  backdrop-filter: blur(24px);
+}
+
+.dark .glass-card {
+  box-shadow: 0 24px 90px rgba(1, 4, 18, 0.45);
 }
