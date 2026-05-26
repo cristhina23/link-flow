@@ -20,9 +20,14 @@ import { getWeeklyStats } from "@/utils/productivity";
 type WeeklySummaryProps = {
   days: WeeklyDay[];
   achievements: Achievement[];
+  showAchievements?: boolean;
 };
 
-export function WeeklySummary({ days, achievements }: WeeklySummaryProps) {
+export function WeeklySummary({
+  days,
+  achievements,
+  showAchievements = true,
+}: WeeklySummaryProps) {
   const [open, setOpen] = useState(true);
   const stats = getWeeklyStats(days);
 
@@ -44,7 +49,7 @@ export function WeeklySummary({ days, achievements }: WeeklySummaryProps) {
         />
       </button>
       {open ? (
-        <div className="grid gap-5 border-t p-5 xl:grid-cols-[1.2fr_.8fr]">
+        <div className={cn("grid gap-5 border-t p-5", showAchievements ? "xl:grid-cols-[1.2fr_.8fr]" : "grid-cols-1")}>
           <div>
             <div className="grid gap-3 sm:grid-cols-4">
               {[
@@ -90,14 +95,16 @@ export function WeeklySummary({ days, achievements }: WeeklySummaryProps) {
               ))}
             </div>
           </div>
-          <div className="space-y-3">
-            {achievements.map((achievement) => (
-              <AchievementCard
-                key={achievement.title}
-                achievement={achievement}
-              />
-            ))}
-          </div>
+          {showAchievements && (
+            <div className="space-y-3">
+              {achievements.map((achievement) => (
+                <AchievementCard
+                  key={achievement.title}
+                  achievement={achievement}
+                />
+              ))}
+            </div>
+          )}
         </div>
       ) : null}
     </Card>
